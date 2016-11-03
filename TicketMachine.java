@@ -101,11 +101,15 @@ public class TicketMachine
     }
 
     public int emptyMachine()
-    {
-        int totalAmount;
-        totalAmount = total;
-        total = 0;
-        return totalAmount;
+    { 
+        if(balance > 0) {
+            return -1;
+        }
+        else{
+            int totalAmount;
+            totalAmount = total;
+            total = 0;
+            return totalAmount;
+        }
     }
-}
-
+}    
