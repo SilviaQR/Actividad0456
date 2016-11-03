@@ -18,15 +18,24 @@ public class TicketMachine
     // The total amount of money collected by this machine.
     private int total;
     
-    private String premio;
+    private int premio;
+    
+    private int billetesMaximos;
+    
+    private int billetesVendidos;
+    
+    private int billetemax;
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost, String premio)
+    public TicketMachine(int cost, int billeteVendido, int billetesMaximos)
     {
         price = cost;
         balance = 0;
         total = 0;
+        billetemax = billetesMaximos;
+        billetesVendidos = 0;
+        premio = billeteVendido;
     }
 
     /**
@@ -68,31 +77,34 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        if(balance >= price) {
-            // Simulate the printing of a ticket.
-            System.out.println("##################");
-            System.out.println("# The BlueJ Line");
-            System.out.println("# Ticket");
-            System.out.println("# " + price + " cents.");
-            System.out.println("##################");
-            System.out.println();
-
-            // Update the total collected with the price.
-            total = total + price;
-            // Reduce the balance by the prince.
-            balance = balance - price;
-            if(premio == premio){
-            System.out.println("Billete premiado");
-            System.out.println("Felicidades");
-            }
+        if(billetesVendidos >= billetemax){
+            System.out.println("No se pueden imrpimir más billetes");
         }
-        else {
-            System.out.println("You must insert at least: " +
-                (price - balance) + " more cents.");
-
+        else if (balance >= price){
+                System.out.println("###############");
+                System.out.println("# The BlueJ Line");
+                System.out.println("# Ticket");
+                System.out.println("# " + price + " cents.");
+                System.out.println("###############");
+                System.out.println();
+                
+                 // Update the total collected with the price.
+                 total = total + price;
+                 // Reduce the balance by the prince.
+                 balance = balance - price;
+                }
+                 if(premio == 1){
+                    System.out.println("Felicidades");
+                    System.out.println("Su billete ha sido premiado.");
+                }
+                  else {
+                  System.out.println("You must insert at least: " +
+                 (price - balance) + " more cents.");
+ 
         }
+        billetesVendidos = billetesVendidos + 1;
     }
-
+             
     /**
      * Return the money in the balance.
      * The balance is cleared.
